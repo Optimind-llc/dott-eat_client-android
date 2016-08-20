@@ -21,10 +21,12 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile project(':socketclusterandroidclient')
+    compile 'com.schibstedspain.android:leku:2.0.1'
 }
 
+
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "socketcluster.io.androiddemo"
@@ -42,6 +44,7 @@ android {
     productFlavors {
     }
     compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
     }
 }
 
