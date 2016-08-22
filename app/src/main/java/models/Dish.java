@@ -1,4 +1,4 @@
-package datatypes;
+package models;
 
 import android.location.Location;
 

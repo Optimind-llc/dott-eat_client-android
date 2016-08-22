@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b81a302-8aaf-4918-8f67-ae8f885b19cc" name="Default" comment="Add datatypes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/datatypes/DelivererReview.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/datatypes/Ingredient.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/datatypes/Order.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/datatypes/Review.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/datatypes/Transaction.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" />
+    <list default="true" id="9b81a302-8aaf-4918-8f67-ae8f885b19cc" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/DelivererReview.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Dish.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/DishReview.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Ingredient.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Order.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Review.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Transaction.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/DelivererReview.java" afterPath="$PROJECT_DIR$/app/src/main/java/models/DelivererReview.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Dish.java" afterPath="$PROJECT_DIR$/app/src/main/java/models/Dish.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/DishReview.java" afterPath="$PROJECT_DIR$/app/src/main/java/models/DishReview.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Ingredient.java" afterPath="$PROJECT_DIR$/app/src/main/java/models/Ingredient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Order.java" afterPath="$PROJECT_DIR$/app/src/main/java/models/Order.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Review.java" afterPath="$PROJECT_DIR$/app/src/main/java/models/Review.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/Transaction.java" afterPath="$PROJECT_DIR$/app/src/main/java/models/Transaction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/datatypes/DishReview.java" afterPath="$PROJECT_DIR$/app/src/main/java/datatypes/DishReview.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/socketclusterandroidclient/socketclusterandroidclient.iml" afterPath="$PROJECT_DIR$/socketclusterandroidclient/socketclusterandroidclient.iml" />
     </list>
     <ignored path="dott-eat_client-android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,7 +43,7 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="DishReview.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/DishReview.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/DishReview.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
@@ -55,7 +53,7 @@
         </entry>
       </file>
       <file leaf-file-name="DelivererReview.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/DelivererReview.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/DelivererReview.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
@@ -65,7 +63,7 @@
         </entry>
       </file>
       <file leaf-file-name="Transaction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Transaction.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Transaction.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
@@ -75,7 +73,7 @@
         </entry>
       </file>
       <file leaf-file-name="Review.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Review.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Review.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
@@ -85,7 +83,7 @@
         </entry>
       </file>
       <file leaf-file-name="Order.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Order.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Order.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
@@ -95,7 +93,7 @@
         </entry>
       </file>
       <file leaf-file-name="Ingredient.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Ingredient.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Ingredient.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
@@ -2577,6 +2575,7 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/datatypes/DishReview.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/datatypes/Review.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/models/Ingredient.java" />
       </list>
     </option>
   </component>
@@ -2656,7 +2655,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="datatypes" />
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2977,6 +2976,14 @@
       <option name="presentableId" value="Default" />
       <updated>1471853593793</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add datatypes">
+      <created>1471857915237</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1471857915237</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3000,7 +3007,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32922825" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32922825" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -3021,7 +3028,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/DishReview.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/DishReview.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
@@ -3029,7 +3036,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/DelivererReview.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/DelivererReview.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
@@ -3037,7 +3044,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Transaction.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
@@ -3045,7 +3052,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Review.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Review.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
@@ -3053,7 +3060,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Order.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Order.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
@@ -3061,7 +3068,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/datatypes/Ingredient.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/Ingredient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
