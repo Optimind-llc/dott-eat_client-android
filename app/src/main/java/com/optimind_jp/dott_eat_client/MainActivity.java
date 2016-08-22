@@ -1,4 +1,4 @@
-package socketcluster.io.androiddemo;
+package com.optimind_jp.dott_eat_client;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements ISocketCluster {
 
     private SocketCluster sc;
     private static String TAG = "SCDemo";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
