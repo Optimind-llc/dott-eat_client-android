@@ -1,8 +1,12 @@
 package models;
 
+import java.util.List;
+
 /**
- * Created by hugh on 2016-08-22.
+ * Represents a customer's order.
  */
 
 public class Order extends Transaction {
+    List<Dish>
+
 }

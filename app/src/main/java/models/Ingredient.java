@@ -1,8 +1,12 @@
 package models;
 
+import java.util.BitSet;
+
 /**
- * Created by hugh on 2016-08-22.
+ * Defines an ingredient that may not be edible to a certain group.
  */
 
-public enum Ingredient {
+public class Ingredient {
+    BitSet ingredientID;
+
 }
