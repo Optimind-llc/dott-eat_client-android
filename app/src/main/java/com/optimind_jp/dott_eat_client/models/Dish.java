@@ -1,4 +1,4 @@
-package models;
+package com.optimind_jp.dott_eat_client.models;
 
 import android.location.Location;
 
