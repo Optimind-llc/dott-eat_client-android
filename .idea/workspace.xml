@@ -7,21 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b81a302-8aaf-4918-8f67-ae8f885b19cc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/servercalls/ServerCallAPI.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Customer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Order.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Review.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Customer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Customer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Deliverer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Deliverer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/DelivererReview.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/DelivererReview.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Dish.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Dish.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/DishReview.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/DishReview.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/InedibleGroup.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/InedibleGroup.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Ingredient.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Ingredient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Order.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Order.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Review.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Review.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/models/Transaction.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Transaction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/servercalls/SCClientFacade.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/servercalls/SCClientFacade.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/data/ResourceManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dott-eat_client-android.iws" />
@@ -55,7 +41,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Order.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Order.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/models/Order.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -115,6 +101,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ResourceManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/data/ResourceManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ServerCallAPI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/servercalls/ServerCallAPI.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -150,30 +146,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/socketclusterandroidclient/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="e#252#270#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="ASEnum" />
-        <option value="ASClass" />
         <option value="Singleton" />
         <option value="ASInterface" />
+        <option value="ASClass" />
       </list>
     </option>
   </component>
@@ -3115,7 +3096,14 @@
       <option name="project" value="LOCAL" />
       <updated>1471860118231</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="moved related packages under main package">
+      <created>1471860327339</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1471860327339</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3157,7 +3145,8 @@
     <MESSAGE value="Added models" />
     <MESSAGE value="servercalls edited" />
     <MESSAGE value="changed package name" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed package name" />
+    <MESSAGE value="moved related packages under main package" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved related packages under main package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -3252,14 +3241,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/servercalls/ServerCallAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -3267,14 +3248,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/servercalls/SCClientFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3314,6 +3287,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/servercalls/ServerCallAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/servercalls/SCClientFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/optimind_jp/dott_eat_client/data/ResourceManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
           <folding />
         </state>
       </provider>
