@@ -1,24 +1,33 @@
 package com.optimind_jp.dott_eat_client;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 
 import com.optimind_jp.dott_eat_client.servercalls.SCClientFacade;
+import com.schibstedspain.leku.LocationPickerActivity;
 
 import socketcluster.io.socketclusterandroidclient.ISocketCluster;
 import socketcluster.io.socketclusterandroidclient.SocketCluster;
 
+import static android.os.SystemClock.sleep;
 
-public class MainActivity extends AppCompatActivity implements ISocketCluster {
+
+public class MainActivity extends AppCompatActivity {
 
     private SocketCluster sc;
     private static String TAG = "SCDemo";
     public static SCClientFacade SCF;
+    private final int WAIT_TIME = 2500;
 
 
     @Override
@@ -29,53 +38,17 @@ public class MainActivity extends AppCompatActivity implements ISocketCluster {
         SCClientFacade.setContext(this);
         SCF = SCClientFacade.getInstance();
 
-
-        // Disconnect button
-        final Button disconnectBtn = (Button) findViewById(R.id.btnDisconnect);
-        disconnectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sc.disconnect();
-            }
-        });
-        // Listen to Rand event button handler
-        final Button listenToRandBtn = (Button) findViewById(R.id.btnListenRand);
-        listenToRandBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sc.registerEvent("rand");
-            }
-        });
-
-        final Button subToWeatherBtn = (Button) findViewById(R.id.btnSubWeather);
-        subToWeatherBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                sc.subscribeToChannel("WEATHER");
-            }
-        });
-        final Button unSubToWeatherBtn = (Button) findViewById(R.id.btnUnSubWeather);
-        unSubToWeatherBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                sc.unsubscribeFromChannel("WEATHER");
-            }
-        });
-
-        final Button pubToWeatherBtn = (Button) findViewById(R.id.btnPubWeather);
-        pubToWeatherBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                sc.publishToChannel("WEATHER", "CLOUDY");
-            }
-        });
-
-
+        startLocationPicker();
+    }
+    private void startLocationPicker(){
+        sleep(WAIT_TIME);
+        Intent i = new Intent(this, LocationPickerActivity.class);
+        startActivityForResult(i, 1);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -84,60 +57,21 @@ public class MainActivity extends AppCompatActivity implements ISocketCluster {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+          //  return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void socketClusterReceivedEvent(String name, String data) {
-        Log.i(TAG, "ReceivedEvent " + name);
-        Log.i(TAG, "ReceivedEvent " + data);
-    }
-
-    @Override
-    public void socketClusterChannelReceivedEvent(String name, String data) {
-        Log.i(TAG, "socketClusterChannelReceivedEvent " + name + " data: " + data);
-    }
-    @Override
-    public void socketClusterDidConnect() {
-        Log.i(TAG, "SocketClusterDidConnect");
-        sc.emitEvent("check", "{message:'shiichi'}");
-    }
-
-    @Override
-    public void socketClusterDidDisconnect() {
-        Log.i(TAG, "socketClusterDidDisconnect");
-    }
-    @Override
-    public void socketClusterOnError(String error) {
-        Log.i(TAG, "socketClusterOnError");
-    }
-    @Override
-    public void socketClusterOnKickOut() {
-        Log.i(TAG, "socketClusterOnKickOut");
-    }
-    @Override
-    public void socketClusterOnSubscribe() {
-        Log.i(TAG, "socketClusterOnSubscribe");
-    }
-    @Override
-    public void socketClusterOnSubscribeFail() {
-        Log.i(TAG, "socketClusterOnSubscribeFail");
-    }
-    @Override
-    public void socketClusterOnUnsubscribe() {
-        Log.i(TAG, "socketClusterOnUnsubscribe");
-    }
 
     @Override
     protected void onStop() {
-        sc.disconnect();
+        //sc.disconnect();
+        //TODO: add scf disconnect stuff
         super.onStop();
     }
 }
