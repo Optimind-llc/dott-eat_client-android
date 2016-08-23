@@ -2,6 +2,7 @@ package com.optimind_jp.dott_eat_client;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -40,10 +41,35 @@ public class MainActivity extends AppCompatActivity {
 
         startLocationPicker();
     }
+
+
+
     private void startLocationPicker(){
         sleep(WAIT_TIME);
         Intent i = new Intent(this, LocationPickerActivity.class);
         startActivityForResult(i, 1);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1){
+            if(resultCode==RESULT_OK){
+                double latitude = data.getDoubleExtra(LocationPickerActivity.LATITUDE, 0);
+
+                Log.d("LATITUDE****", String.valueOf(latitude));
+                double longitude = data.getDoubleExtra(LocationPickerActivity.LONGITUDE, 0);
+                Log.d("LONGITUDE****", String.valueOf(longitude));
+                SCF.getDishesFromCoordinates(latitude, longitude);
+                String address = data.getStringExtra(LocationPickerActivity.LOCATION_ADDRESS);
+                Log.d("ADDRESS****", String.valueOf(address));
+                String postalcode = data.getStringExtra(LocationPickerActivity.ZIPCODE);
+                Log.d("POSTALCODE****", String.valueOf(postalcode));
+                // bundle = data.getBundleExtra(LocationPickerActivity.TRANSITION_BUNDLE);
+                //Log.d("BUNDLE TEXT****", bundle.getString("test"));
+                Address fullAddress = data.getParcelableExtra(LocationPickerActivity.ADDRESS);
+                Log.d("FULL ADDRESS****", fullAddress.toString());
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -31,6 +31,10 @@ public class SCClientFacade implements ServerCallAPI, ISocketCluster {
         sc.connect();
     }
 
+    public void getDishesFromCoordinates(double lat, double lon){
+        sc.emitEvent("dishes from coords",String.format("{lat:%1$d,lon:%2$d}", lat, lon));
+    }
+
     @Override
     public void socketClusterReceivedEvent(String name, String data) {
         Log.i(TAG, "ReceivedEvent " + name);
