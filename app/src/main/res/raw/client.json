@@ -1,0 +1,10 @@
+{
+  "client":{
+    "UUID":"820c6c0e-68ec-11e6-8b77-86f30ca893d3",
+    "firstName":"Brad",
+    "lastName":"Pitt",
+    "nickName":"bpit",
+    "age": 35,
+    "email": "bpitt@starcat.com"
+  }
+}

@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.optimind_jp.dott_eat_client.servercalls.SCClientFacade;
+
 import socketcluster.io.socketclusterandroidclient.ISocketCluster;
 import socketcluster.io.socketclusterandroidclient.SocketCluster;
 
@@ -16,22 +18,18 @@ public class MainActivity extends AppCompatActivity implements ISocketCluster {
 
     private SocketCluster sc;
     private static String TAG = "SCDemo";
+    public static SCClientFacade SCF;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sc = new SocketCluster("192.168.0.10", "8000", false, this);
-        sc.setDelegate(this);
-        // Connect button
-        final Button connectBtn = (Button) findViewById(R.id.btnConnect);
-        connectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sc.connect();
-            }
-        });
+        SCClientFacade.setContext(this);
+        SCF = SCClientFacade.getInstance();
+
+
         // Disconnect button
         final Button disconnectBtn = (Button) findViewById(R.id.btnDisconnect);
         disconnectBtn.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements ISocketCluster {
         Log.i(TAG, "SocketClusterDidConnect");
         sc.emitEvent("check", "{message:'shiichi'}");
     }
+
     @Override
     public void socketClusterDidDisconnect() {
         Log.i(TAG, "socketClusterDidDisconnect");
@@ -134,5 +133,11 @@ public class MainActivity extends AppCompatActivity implements ISocketCluster {
     @Override
     public void socketClusterOnUnsubscribe() {
         Log.i(TAG, "socketClusterOnUnsubscribe");
+    }
+
+    @Override
+    protected void onStop() {
+        sc.disconnect();
+        super.onStop();
     }
 }
