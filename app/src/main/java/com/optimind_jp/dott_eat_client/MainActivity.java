@@ -1,23 +1,16 @@
 package com.optimind_jp.dott_eat_client;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import com.optimind_jp.dott_eat_client.servercalls.SCClientFacade;
 import com.schibstedspain.leku.LocationPickerActivity;
 
-import socketcluster.io.socketclusterandroidclient.ISocketCluster;
 import socketcluster.io.socketclusterandroidclient.SocketCluster;
 
 import static android.os.SystemClock.sleep;
@@ -27,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SocketCluster sc;
     private static String TAG = "SCDemo";
-    public static SCClientFacade SCF;
+    public static SCClientFacade sCF;
     private final int WAIT_TIME = 2500;
 
 
@@ -37,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SCClientFacade.setContext(this);
-        SCF = SCClientFacade.getInstance();
+        sCF = SCClientFacade.getInstance();
+
 
         startLocationPicker();
     }
@@ -58,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("LATITUDE****", String.valueOf(latitude));
                 double longitude = data.getDoubleExtra(LocationPickerActivity.LONGITUDE, 0);
                 Log.d("LONGITUDE****", String.valueOf(longitude));
-                SCF.getDishesFromCoordinates(latitude, longitude);
+                String dishes = sCF.getDishesFromCoordinates(latitude, longitude);
+                Log.d("DISHES", dishes);
                 String address = data.getStringExtra(LocationPickerActivity.LOCATION_ADDRESS);
                 Log.d("ADDRESS****", String.valueOf(address));
                 String postalcode = data.getStringExtra(LocationPickerActivity.ZIPCODE);
