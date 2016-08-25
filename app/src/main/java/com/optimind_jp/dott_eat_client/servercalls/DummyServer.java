@@ -37,11 +37,52 @@ public class DummyServer {
                 "    \"rating\":4.6" +
                 "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
                 "  }";
-        //String s2 = "{\"name\":\"margerita\", \"lat\":35.151262, \"lon\":136.966370}";
-        //String s3 = "{\"name\":\"French toast\",\"lat\":35.159114, \"lon\":136.964980}";
-        //String s4 = "{\"name\":\"Chicken Tika\", \"lat\":35.167707, \"lon\":136.953054}";
+        String s2 = "{" +
+                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"name\":\"margerita\"," +
+                "    \"description\":\"dishDescription\"," +
+                "    \"basePrice\":3000," +
+                "    \"lat\":35.151262," +
+                "    \"lon\":136.966370," +
+                "    \"imageURL\":\"http://recipetreasure.com/wp-content/uploads/2014/02/flatbread-margherita-pizza-recipe-treasure-3.jpg\"," +
+                "    \"rating\":4.6" +
+                "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
+                "  }";
+        String s3 = "{" +
+                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"name\":\"French toast\"," +
+                "    \"description\":\"dishDescription\"," +
+                "    \"basePrice\":3000," +
+                "    \"lat\":35.159114," +
+                "    \"lon\":136.964980," +
+                "    \"imageURL\":\"http://d1doqjmisr497k.cloudfront.net/~/media/Recipe-Photos/McCormick/Breakfast-Brunch/1007x545/Quick-and-Easy-French-Toast_Recipes_1007x545.ashx?vd=20150602T025411Z&hash=0387CB1C6668FC27934AB9DF48B972B0F1372545\"," +
+                "    \"rating\":4.6" +
+                "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
+                "  }";
+        String s4 = "{" +
+                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"name\":\"Chiken Tikka\"," +
+                "    \"description\":\"dishDescription\"," +
+                "    \"basePrice\":3000," +
+                "    \"lat\":35.167707," +
+                "    \"lon\":136.953054," +
+                "    \"imageURL\":\"https://bigoven-res.cloudinary.com/image/upload/t_recipe-256/chicken-tikka-masala-94.jpg\"," +
+                "    \"rating\":4.6" +
+                "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
+                "  }";
+        String s5 = "{" +
+                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"name\":\"Cheese Burger\"," +
+                "    \"description\":\"dishDescription\"," +
+                "    \"basePrice\":3000," +
+                "    \"lat\":35.167707," +
+                "    \"lon\":136.953054," +
+                "    \"imageURL\":\"https://bigoven-res.cloudinary.com/image/upload/t_recipe-256/perfect-cheese-burger.jpg\"," +
+                "    \"rating\":4.6" +
+                "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
+                "  }";
         //String s5 = "{\"name\":\"Cheese Burger\", \"lat\":35.167417, \"lon\":136.945770}";
-        String[] slist = new String[]{s1};//,s2,s3,s4,s5};
+        String[] slist = new String[]{s1,s2,s3,s4,s5};
         JSONArray res = new JSONArray();
         for (String s: slist) {
             try {

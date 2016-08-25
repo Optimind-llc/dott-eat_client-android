@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private void initImageLoader(){
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheOnDisc(true).cacheInMemory(true)
-                .imageScaleType(ImageScaleType.EXACTLY)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 .displayer(new FadeInBitmapDisplayer(300)).build();
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
