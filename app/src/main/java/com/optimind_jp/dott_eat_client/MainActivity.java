@@ -7,9 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.optimind_jp.dott_eat_client.models.Dish;
 import com.optimind_jp.dott_eat_client.servercalls.SCClientFacade;
 import com.schibstedspain.leku.LocationPickerActivity;
+
+import java.util.ArrayList;
 
 import socketcluster.io.socketclusterandroidclient.SocketCluster;
 
@@ -23,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
     public static SCClientFacade sCF;
     private final int WAIT_TIME = 2500;
 
+    private GridView gridView;
+    private DishGridAdapter dishGridAdapter;
+    private double lat=0;
+    private double lon=0;
+    private ArrayList<Dish> dishList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +47,29 @@ public class MainActivity extends AppCompatActivity {
 
         SCClientFacade.setContext(this);
         sCF = SCClientFacade.getInstance();
-
-
+        initImageLoader();
         startLocationPicker();
+    }
+    private void initImageLoader(){
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheOnDisc(true).cacheInMemory(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .displayer(new FadeInBitmapDisplayer(300)).build();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                getApplicationContext())
+                .defaultDisplayImageOptions(defaultOptions)
+                .memoryCache(new WeakMemoryCache())
+                .discCacheSize(100 * 1024 * 1024).build();
+
+        ImageLoader.getInstance().init(config);
+    }
+
+
+    private void createDishGrid(){
+        gridView = (GridView) findViewById(R.id.gridView);
+        dishGridAdapter = new DishGridAdapter(this, R.layout.grid_single_dish_layout, dishList);
+        gridView.setAdapter(dishGridAdapter);
     }
 
 
@@ -52,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("LATITUDE****", String.valueOf(latitude));
                 double longitude = data.getDoubleExtra(LocationPickerActivity.LONGITUDE, 0);
                 Log.d("LONGITUDE****", String.valueOf(longitude));
-                String dishes = sCF.getDishesFromCoordinates(latitude, longitude);
-                Log.d("DISHES", dishes);
+                this.dishList = new ArrayList<Dish>(sCF.getDishesFromCoordinates(latitude, longitude));
+
                 String address = data.getStringExtra(LocationPickerActivity.LOCATION_ADDRESS);
                 Log.d("ADDRESS****", String.valueOf(address));
                 String postalcode = data.getStringExtra(LocationPickerActivity.ZIPCODE);
@@ -65,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+        createDishGrid();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
