@@ -2,6 +2,7 @@ package com.optimind_jp.dott_eat_client.data;
 
 import com.optimind_jp.dott_eat_client.models.Dish;
 
+import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,9 +14,28 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class ResourceManager {
-    ConcurrentHashMap<UUID, Dish> dishes;
+    ConcurrentHashMap<UUID, Dish> dishes = new ConcurrentHashMap<UUID, Dish>();
 
-    public ResourceManager() {
+    private ResourceManager() {
+    }
+    private static ResourceManager instance= new ResourceManager();
+    public static ResourceManager getInstance(){
+        return instance;
+    }
+    public void addDishes(Collection<Dish> dishList){
+        for (Dish d: dishList) {
+            dishes.put(d.dishID, d);
+        }
+    }
+    public void setDistances(double lat, double lon){
+        for (Dish d: dishes.values()) {
+            float[] distance = new float[3];
+            android.location.Location.distanceBetween(lat, lon, d.lat, d.lon, distance);
+            d.setDistance((int)distance[0]);
+        }
+    }
 
+    public Collection<Dish> getDishes() {
+        return dishes.values();
     }
 }

@@ -3,6 +3,7 @@ package com.optimind_jp.dott_eat_client.servercalls;
 import android.app.Activity;
 import android.util.Log;
 
+import com.optimind_jp.dott_eat_client.data.ResourceManager;
 import com.optimind_jp.dott_eat_client.models.Dish;
 import com.optimind_jp.dott_eat_client.parsers.DataParser;
 
@@ -43,7 +44,9 @@ public class SCClientFacade implements ServerCallAPI, ISocketCluster {
         return dishes;
     }
     public Collection<Dish> getDishesFromCoordinates(double lat, double lon){
-        return DataParser.parseDishList(getDishesJsonFromCoordinates(lat, lon));
+        ResourceManager.getInstance().addDishes(DataParser.parseDishList(getDishesJsonFromCoordinates(lat, lon)));
+        ResourceManager.getInstance().setDistances(lat, lon);
+        return ResourceManager.getInstance().getDishes();
     }
 
     @Override

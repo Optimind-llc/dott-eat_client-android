@@ -27,7 +27,7 @@ public class DummyServer {
     }
     private static JSONArray getDummyDishes(){
         String s1 = "{" +
-                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"dishID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
                 "    \"name\":\"tacos\"," +
                 "    \"description\":\"dishDescription\"," +
                 "    \"basePrice\":3000," +
@@ -38,7 +38,7 @@ public class DummyServer {
                 "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
                 "  }";
         String s2 = "{" +
-                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"dishID\": \"96c1e093-d4e2-45e1-8fda-eb2b4c199718\"" +
                 "    \"name\":\"margerita\"," +
                 "    \"description\":\"dishDescription\"," +
                 "    \"basePrice\":3000," +
@@ -49,7 +49,7 @@ public class DummyServer {
                 "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
                 "  }";
         String s3 = "{" +
-                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"dishID\": \"46c8722c-c4bc-49b0-b5b8-c907a08a0d3d\"" +
                 "    \"name\":\"French toast\"," +
                 "    \"description\":\"dishDescription\"," +
                 "    \"basePrice\":3000," +
@@ -60,7 +60,7 @@ public class DummyServer {
                 "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
                 "  }";
         String s4 = "{" +
-                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"dishID\": \"6176826b-ba39-49bf-b35c-8087107c0d3d\"" +
                 "    \"name\":\"Chiken Tikka\"," +
                 "    \"description\":\"dishDescription\"," +
                 "    \"basePrice\":3000," +
@@ -71,13 +71,13 @@ public class DummyServer {
                 "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
                 "  }";
         String s5 = "{" +
-                "    \"UUID\": \"12d05e5b-662d-4b39-b4f6-41fc55ccc226\"" +
+                "    \"dishID\": \"31c1b599-7049-45ad-bb88-64c3bf291991\"" +
                 "    \"name\":\"Cheese Burger\"," +
                 "    \"description\":\"dishDescription\"," +
                 "    \"basePrice\":3000," +
                 "    \"lat\":35.167707," +
                 "    \"lon\":136.953054," +
-                "    \"imageURL\":\"https://bigoven-res.cloudinary.com/image/upload/t_recipe-256/perfect-cheese-burger.jpg\"," +
+                "    \"imageURL\":\"http://www.graftonstreetva.com/wp-content/uploads/2013/02/cheeseburger.jpg\"," +
                 "    \"rating\":4.6" +
                 "    \"reviews\":[{\"authorID\": \"820c6c0e-68ec-11e6-8b77-86f30ca893d3\", \"contents\": \"This dish was delicious\"}]" +
                 "  }";
