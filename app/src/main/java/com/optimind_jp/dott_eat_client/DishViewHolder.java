@@ -41,10 +41,19 @@ public class DishViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private void updateView(View view){
         if(isSelected){
             view.setAlpha(0.5f);
-            view.setLabelFor();
+            view.setTag("SELECTED");
         }else {
             view.setAlpha(1f);
+            view.setTag("NOT SELECTED");
         }
+    }
 
+    public static boolean isSelected(View view){
+        Object tag = view.getTag();
+        if(tag!=null){
+            return tag=="SELECTED";
+        }else{
+            return false;
+        }
     }
 }

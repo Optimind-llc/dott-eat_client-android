@@ -166,6 +166,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
+        if(DishViewHolder.isSelected(v)){
+            mNotifCount++;
+        }else{
+            mNotifCount--;
+        }
+        invalidateOptionsMenu();
     }
 }

@@ -39,8 +39,7 @@ public class DishStaggeredAdapter  extends RecyclerView.Adapter<DishViewHolder> 
     public DishViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_list, null);
-        DishViewHolder rcv = new DishViewHolder(layoutView);
-        rcv.setListener(this.listener);
+        DishViewHolder rcv = new DishViewHolder(layoutView, listener);
         return rcv;
     }
 
