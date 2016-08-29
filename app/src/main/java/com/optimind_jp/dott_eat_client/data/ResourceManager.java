@@ -2,6 +2,7 @@ package com.optimind_jp.dott_eat_client.data;
 
 import com.optimind_jp.dott_eat_client.models.Dish;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,5 +38,9 @@ public class ResourceManager {
 
     public Collection<Dish> getDishes() {
         return dishes.values();
+    }
+
+    public ArrayList<Dish> getDishList(){
+        return new ArrayList<>(dishes.values());
     }
 }

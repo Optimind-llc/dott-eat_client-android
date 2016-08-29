@@ -1,9 +1,14 @@
 package com.optimind_jp.dott_eat_client;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.optimind_jp.dott_eat_client.data.ResourceManager;
 import com.optimind_jp.dott_eat_client.models.Dish;
 import com.optimind_jp.dott_eat_client.servercalls.SCClientFacade;
 import com.schibstedspain.leku.LocationPickerActivity;
@@ -33,11 +39,15 @@ public class MainActivity extends AppCompatActivity {
     public static SCClientFacade sCF;
     private final int WAIT_TIME = 2500;
 
-    private GridView gridView;
-    private DishGridAdapter dishGridAdapter;
+    //private GridView gridView;
+    //private DishGridAdapter dishGridAdapter;
+    private DishStaggeredAdapter dishAdapter;
+    private RecyclerView recyclerView;
+    private StaggeredGridLayoutManager gridLayoutManager;
     private double lat=0;
     private double lon=0;
-    private ArrayList<Dish> dishList;
+
+
 
 
     @Override
@@ -67,9 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void createDishGrid(){
-        gridView = (GridView) findViewById(R.id.gridView);
-        dishGridAdapter = new DishGridAdapter(this, R.layout.grid_single_dish_layout, dishList);
-        gridView.setAdapter(dishGridAdapter);
+        //gridView = (GridView) findViewById(R.id.gridView);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        gridLayoutManager = new StaggeredGridLayoutManager(2,1);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        this.dishAdapter = new DishStaggeredAdapter(this, ResourceManager.getInstance().getDishList());
+        recyclerView.setAdapter(dishAdapter);
     }
 
 
@@ -83,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==1){
             if(resultCode==RESULT_OK){
-                double latitude = data.getDoubleExtra(LocationPickerActivity.LATITUDE, 0);
+                this.lat= data.getDoubleExtra(LocationPickerActivity.LATITUDE, 0);
 
-                Log.d("LATITUDE****", String.valueOf(latitude));
-                double longitude = data.getDoubleExtra(LocationPickerActivity.LONGITUDE, 0);
-                Log.d("LONGITUDE****", String.valueOf(longitude));
-                this.dishList = new ArrayList<Dish>(sCF.getDishesFromCoordinates(latitude, longitude));
+
+                this.lon = data.getDoubleExtra(LocationPickerActivity.LONGITUDE, 0);
+                sCF.getDishesFromCoordinates(lat, lon);
+
+
 
                 String address = data.getStringExtra(LocationPickerActivity.LOCATION_ADDRESS);
                 Log.d("ADDRESS****", String.valueOf(address));
