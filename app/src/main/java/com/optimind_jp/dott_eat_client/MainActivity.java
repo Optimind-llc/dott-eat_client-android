@@ -24,6 +24,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.optimind_jp.dott_eat_client.data.ResourceManager;
+import com.optimind_jp.dott_eat_client.models.Customer;
+import com.optimind_jp.dott_eat_client.models.CustomerStatus;
 import com.optimind_jp.dott_eat_client.models.Dish;
 import com.optimind_jp.dott_eat_client.servercalls.SCClientFacade;
 import com.schibstedspain.leku.LocationPickerActivity;
@@ -63,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sCF = SCClientFacade.getInstance();
         initImageLoader();
         startLocationPicker();
+
+        // load customer memory from file
+        ResourceManager resMan = ResourceManager.getInstance();
+        resMan.loadAuth(this);
     }
     private void initImageLoader(){
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
@@ -134,9 +140,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         notifCount.setText(String.valueOf(mNotifCount));
         return true;
     }
+    
     private void setNotifCount(int count){
         mNotifCount = count;
         invalidateOptionsMenu();
+    }
+    
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        ResourceManager resMan = ResourceManager.getInstance();
+        Customer auth = resMan.getAuth();
+        boolean isLoggedIn = (auth != null &&
+                (CustomerStatus.ONLINE == auth.getStatus() ||
+                CustomerStatus.BLOCKED == auth.getStatus()));
+        menu.findItem(R.id.menu_login).setVisible(!isLoggedIn);
+        menu.findItem(R.id.menu_recent_history).setVisible(isLoggedIn);
+        menu.findItem(R.id.menu_settings).setVisible(isLoggedIn);
+        menu.findItem(R.id.menu_recommend).setVisible(isLoggedIn);
+        menu.findItem(R.id.menu_logout).setVisible(isLoggedIn);
+        return true;
     }
 
     @Override
