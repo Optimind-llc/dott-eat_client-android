@@ -24,17 +24,17 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.optimind_jp.dott_eat_client.data.ResourceManager;
+import com.optimind_jp.dott_eat_client.models.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -299,16 +299,38 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==RC_SIGN_IN){ //was signin via google
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) { //was signed in via google
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(result.isSuccess()){
+            if(result.isSuccess()) {
                 GoogleSignInAccount gAccount = result.getSignInAccount();
                 mStatusTextView.setText("Succesfully signed in as "+ gAccount.getDisplayName());
-            }else{
+                handleGoogleSignIn(gAccount);
+            }
+            else{
                 mStatusTextView.setText("Sign in failed.");
             }
         }
-        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void handleGoogleSignIn(GoogleSignInAccount gAccount){
+        if(!isSignedUp(gAccount.getIdToken()))
+        {
+            Customer auth = new Customer(gAccount.getEmail(), gAccount.getDisplayName(), gAccount.getFamilyName(), gAccount.getGivenName());
+            auth.setPhotoUrl(gAccount.getPhotoUrl());
+            ResourceManager resMan = ResourceManager.getInstance();
+            resMan.updateAuth(this, auth);
+            Intent i = new Intent(this, SignUpActivity.class);
+            startActivity(i);
+        }
+        else{}
+    }
+
+    // check the google id is Signed up or not when login via google account succeeded.
+    // only valid on test stage
+    private boolean isSignedUp(String gToken) {
+        return false;
     }
 
     private interface ProfileQuery {
