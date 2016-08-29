@@ -47,9 +47,19 @@ public class ResourceManager {
 
     public boolean updateAuth(Context context, Customer newAuth)
     {
+        if(null == auth)
+            auth = new Customer();
         auth.copy(newAuth);
         File file = context.getFileStreamPath(context.getString(R.string.customer_file));
         return saveObject(auth, file);
+    }
+
+    public boolean clearAuth(Context context)
+    {
+        auth = null;
+
+        File file = new File(context.getString(R.string.customer_file));
+        return file.delete();
     }
 
     public void addDishes(Collection<Dish> dishList){

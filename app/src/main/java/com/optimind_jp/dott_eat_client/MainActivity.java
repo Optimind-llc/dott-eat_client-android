@@ -175,7 +175,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
             return true;
         }
-
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.menu_logout) {
+            ResourceManager resMan = ResourceManager.getInstance();
+            resMan.clearAuth(this);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

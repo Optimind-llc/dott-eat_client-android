@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken(getString(R.string.server_client_id))
                 .build();
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
@@ -286,8 +287,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             case R.id.find_pwd_button:
                 break;
             case R.id.sign_up_button:
+                ResourceManager resMan = ResourceManager.getInstance();
+                resMan.clearAuth(this);
                 Intent i = new Intent(this, SignUpActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.email_sign_in_button:
                 attemptLogin();
@@ -318,11 +322,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if(!isSignedUp(gAccount.getIdToken()))
         {
             Customer auth = new Customer(gAccount.getEmail(), gAccount.getDisplayName(), gAccount.getFamilyName(), gAccount.getGivenName());
-            auth.setPhotoUrl(gAccount.getPhotoUrl());
+            auth.setPhotoUrl(gAccount.getPhotoUrl().toString());
             ResourceManager resMan = ResourceManager.getInstance();
             resMan.updateAuth(this, auth);
             Intent i = new Intent(this, SignUpActivity.class);
             startActivity(i);
+            finish();
         }
         else{}
     }

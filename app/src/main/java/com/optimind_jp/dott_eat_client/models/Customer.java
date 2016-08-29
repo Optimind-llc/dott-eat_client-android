@@ -1,9 +1,6 @@
 package com.optimind_jp.dott_eat_client.models;
 
-import android.net.Uri;
-
 import java.io.Serializable;
-import java.net.URL;
 import java.util.UUID;
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class Customer implements Serializable {
     private UUID customerID;
     private String email;
     private String familyName, givenName, nickName, description;
-    private Uri photoUrl;
+    private String photoUrl;
     private String telephone;
     private String appToken;
     private String webPayToken;
@@ -24,6 +21,8 @@ public class Customer implements Serializable {
     private List<Order> currentOrders,historyOrders;
     private List<Transaction> historyActions;
 
+    public Customer() {
+    }
     public Customer(String email, String nickName, String familyName, String givenName) {
         this.customerID = null;
         this.email = email;
@@ -56,18 +55,40 @@ public class Customer implements Serializable {
         this.historyOrders = newCustomer.historyOrders;
         return;
     }
-    public void setPhotoUrl(Uri photoUrl) {
-        this.photoUrl = photoUrl;
-        return;
-    }
-    public void setTelephone(){
-        this.telephone = telephone;
-        return;
-    }
 
     public CustomerStatus getStatus(){
         return this.status;
     }
+    public String getEmail(){
+        return this.email;
+    }
+    public String getFamilyName(){
+        return this.familyName;
+    }
+    public String getGivenName(){
+        return this.givenName;
+    }
+    public String getNickName(){
+        return this.nickName;
+    }
+    public String getPhotoUrl(){
+        return this.photoUrl;
+    }
+
+    public void setStatus(CustomerStatus status) {
+        this.status = status;
+        return;
+    }
+    public void setTelephone( String telephone ){
+        this.telephone = telephone;
+        return;
+    }
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+        return;
+    }
+
+
     // generate webpay token by credit card information
     // return: [true] : success and save the token in "webPayToken",
     //         [false]: fail.

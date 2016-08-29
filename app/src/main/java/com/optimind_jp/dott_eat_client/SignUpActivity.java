@@ -3,6 +3,9 @@ package com.optimind_jp.dott_eat_client;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -24,7 +27,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.optimind_jp.dott_eat_client.data.ResourceManager;
+import com.optimind_jp.dott_eat_client.models.Customer;
+import com.optimind_jp.dott_eat_client.models.CustomerStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,19 +59,46 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
 
     // UI references.
     private AutoCompleteTextView mEmailView;
+    private EditText mTelephoneView;
+    private EditText mNickNameView;
+    private EditText mFamilyNameView;
+    private EditText mGivenNameView;
     private EditText mPasswordView;
+    private ImageView mPhotoView;
     private View mProgressView;
     private View mSignUpFormView;
+    private Customer mAuth;
+
+    private String mTelephone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        ResourceManager resMan = ResourceManager.getInstance();
+        mAuth = resMan.getAuth();
         // Set up the sign up form.
+
+
+        mFamilyNameView = (EditText) findViewById(R.id.family_name);
+        mGivenNameView = (EditText) findViewById(R.id.given_name);
+        mNickNameView = (EditText) findViewById(R.id.nick_name);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mPhotoView = (ImageView) findViewById(R.id.photo) ;
         populateAutoComplete();
+        if(mAuth != null) {
+            loadGoogleAccountData();
+        }
+
+
+        mTelephoneView = (EditText) findViewById(R.id.telephone);
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        if(mAuth != null) {
+            mPasswordView.setVisibility(View.GONE);
+        }
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -73,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.sign_up_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +122,29 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         mProgressView = findViewById(R.id.sign_up_progress);
     }
 
+    private void loadGoogleAccountData() {
+        mFamilyNameView.setText(mAuth.getFamilyName());
+        mFamilyNameView.setFocusable(false);
+        mFamilyNameView.setClickable(false);
+        mGivenNameView.setText(mAuth.getGivenName());
+        mGivenNameView.setFocusable(false);
+        mGivenNameView.setClickable(false);
+        mNickNameView.setText(mAuth.getNickName());
+        mNickNameView.setFocusable(false);
+        mNickNameView.setClickable(false);
+        mEmailView.setText(mAuth.getEmail());
+        mEmailView.setFocusable(false);
+        mEmailView.setClickable(false);
+
+        Drawable fallback=  ContextCompat.getDrawable(this, R.drawable.powered_by_google_dark);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisc(true).resetViewBeforeLoading(true)
+                .showImageForEmptyUri(fallback)
+                .showImageOnFail(fallback)
+                .showImageOnLoading(fallback).build();
+        imageLoader.displayImage(mAuth.getPhotoUrl(), mPhotoView, options);
+    }
     private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);
     }
@@ -101,18 +161,26 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         }
 
         // Reset errors.
+        mNickNameView.setError(null);
+        mFamilyNameView.setError(null);
+        mGivenNameView.setError(null);
         mEmailView.setError(null);
+        mTelephoneView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the sign up attempt.
+        String nickName = mNickNameView.getText().toString();
+        String familyName = mFamilyNameView.getText().toString();
+        String givenName = mGivenNameView.getText().toString();
         String email = mEmailView.getText().toString();
+        String telephone = mTelephoneView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (mAuth == null && !TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -129,6 +197,17 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             cancel = true;
         }
 
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(telephone)) {
+            mTelephoneView.setError(getString(R.string.error_field_required));
+            focusView = mTelephoneView;
+            cancel = true;
+        } else if (!isTelephoneValid(telephone)) {
+            mTelephoneView.setError(getString(R.string.error_invalid_telephone));
+            focusView = mTelephoneView;
+            cancel = true;
+        }
+
         if (cancel) {
             // There was an error; don't attempt sign up and focus the first
             // form field with an error.
@@ -136,6 +215,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user sign up attempt.
+            mTelephone = telephone;
             showProgress(true);
             mAuthTask = new UserSignUpTask(email, password);
             mAuthTask.execute((Void) null);
@@ -152,6 +232,10 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         return password.length() > 4;
     }
 
+    private boolean isTelephoneValid(String telephone) {
+        //TODO: Replace this with your own logic
+        return telephone.length() == 11;
+    }
     /**
      * Shows the progress UI and hides the sign up form.
      */
@@ -276,6 +360,12 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             }
 
             // TODO: register the new account here.
+            mAuth.setTelephone(mTelephone);
+            mAuth.setStatus(CustomerStatus.ONLINE);
+
+            ResourceManager resMan = ResourceManager.getInstance();
+            resMan.updateAuth(SignUpActivity.this, mAuth);
+            finish();
             return true;
         }
 

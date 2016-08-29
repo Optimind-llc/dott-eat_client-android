@@ -30,12 +30,16 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="title_activity_signup">sign up</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="prompt_family_name">姓</string>
+    <string name="prompt_given_name">名</string>
+    <string name="prompt_nick_name">ニックネーム</string>
+    <string name="prompt_password">パスワード</string>
+    <string name="prompt_telephone">携帯番号</string>
+    <string name="action_log_in">Log in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_telephone">This telephone number is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
