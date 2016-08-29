@@ -1,6 +1,56 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/menu_login" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/menu_categories" android:title="@string/action_categories"
+        android:icon="@drawable/ic_menu_categories"
+        android:orderInCategory="1" app:showAsAction="ifRoom">
+        <menu>
+            <item android:id="@+id/submenu_category_chinese" android:title="@string/action_category_chinese"/>
+            <item android:id="@+id/submenu_category_japanese" android:title="@string/action_category_japanese"/>
+            <item android:id="@+id/submenu_category_western" android:title="@string/action_category_western"/>
+            <item android:id="@+id/submenu_category_vegetarian" android:title="@string/action_category_vegetarian"/>
+            <item android:id="@+id/submenu_category_halal" android:title="@string/action_category_halal"/>
+        </menu>
+    </item>
+    <item android:id="@+id/menu_sort" android:title="@string/action_sort"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:orderInCategory="1" app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/submenu_sort_low2high" android:title="@string/action_sort_low2high"/>
+            <item android:id="@+id/submenu_sort_high2low" android:title="@string/action_sort_high2low"/>
+            <item android:id="@+id/submenu_sort_fast" android:title="@string/action_sort_fast"/>
+            <item android:id="@+id/submenu_sort_review" android:title="@string/action_sort_review"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/menu_search" android:title="@string/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="1" app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/menu_confirm_cart" android:title="@string/action_confirm_cart"
+        android:icon="@drawable/ic_menu_cart"
+        android:orderInCategory="1" app:showAsAction="always" />
+
+    <item android:id="@+id/menu_location_reset" android:title="@string/action_location_reset"
+        android:icon="@android:drawable/ic_menu_mylocation"
+        android:orderInCategory="1" app:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/menu_login" android:title="@string/action_login"
+        android:orderInCategory="2" app:showAsAction="never" />
+
+    <item android:id="@+id/menu_recent_history" android:title="@string/action_recent_history"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:orderInCategory="3" app:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/menu_settings" android:title="@string/action_settings"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:orderInCategory="3" app:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/menu_recommend" android:title="@string/action_recommend"
+        android:icon="@android:drawable/ic_menu_share"
+        android:orderInCategory="3" app:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/menu_logout" android:title="@string/action_logout"
+        android:orderInCategory="3" app:showAsAction="never" />
 </menu>

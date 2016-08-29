@@ -2,8 +2,29 @@
     <string name="app_name">.eat</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Login</string>
-    <string name="title_activity_login">Sign in</string>
+
+    <string name="action_login">Login</string>
+    <string name="action_search">検索</string>
+    <string name="action_categories">カテゴリー</string>
+    <string name="action_category_chinese">中華</string>
+    <string name="action_category_japanese">和食</string>
+    <string name="action_category_western">洋食</string>
+    <string name="action_category_vegetarian">ベジタリアン</string>
+    <string name="action_category_halal">ハラール</string>
+    <string name="action_sort">並べ替え</string>
+    <string name="action_sort_low2high">価格の安い順番</string>
+    <string name="action_sort_high2low">価格の高い順番</string>
+    <string name="action_sort_fast">料理の早い順番</string>
+    <string name="action_sort_review">レビューの評価順</string>
+    <string name="action_sign_up">新規登録</string>
+    <string name="action_settings">個人情報確認</string>
+    <string name="action_location_reset">届け先再設定</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_recommend">友達に紹介</string>
+    <string name="action_confirm_cart">カート確認</string>
+    <string name="action_recent_history">注文履歴</string>
+    <string name="action_find_password">パスワードをわすれたら</string>
+    <string name="title_activity_login"> Login</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -17,4 +38,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_sign_up">Sign up</string>
 </resources>
