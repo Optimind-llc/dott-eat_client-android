@@ -20,16 +20,15 @@ public class DishViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private boolean isSelected = false;
     private View.OnClickListener listener;
 
-    public DishViewHolder(View itemView) {
+    public DishViewHolder(View itemView, View.OnClickListener listener) {
         super(itemView);
         countryName = (TextView) itemView.findViewById(R.id.dishName);
         countryPhoto = (ImageView) itemView.findViewById(R.id.dishImage);
         dishPrice = (TextView) itemView.findViewById(R.id.dishPriceView);
+        this.listener = listener;
         itemView.setOnClickListener(this);
     }
-    public void setListener(View.OnClickListener listener){
-        this.listener=listener;
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -42,8 +41,9 @@ public class DishViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private void updateView(View view){
         if(isSelected){
             view.setAlpha(0.5f);
+            view.setLabelFor();
         }else {
-            view.setAlpha(0f);
+            view.setAlpha(1f);
         }
 
     }
