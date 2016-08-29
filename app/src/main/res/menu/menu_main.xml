@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
+
     <item android:id="@+id/menu_categories" android:title="@string/action_categories"
         android:icon="@drawable/ic_menu_categories"
         android:orderInCategory="1" app:showAsAction="ifRoom">
@@ -31,6 +32,14 @@
     <item android:id="@+id/menu_confirm_cart" android:title="@string/action_confirm_cart"
         android:icon="@drawable/ic_menu_cart"
         android:orderInCategory="1" app:showAsAction="always" />
+    <item
+        android:id="@+id/badge"
+        android:actionLayout="@layout/feed_update_count"
+        android:icon="@drawable/shape_notification"
+        android:orderInCategory="3"
+        app:showAsAction="always"
+        />
+
 
     <item android:id="@+id/menu_location_reset" android:title="@string/action_location_reset"
         android:icon="@android:drawable/ic_menu_mylocation"

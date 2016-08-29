@@ -6,12 +6,15 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.location.Address;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -32,7 +35,7 @@ import socketcluster.io.socketclusterandroidclient.SocketCluster;
 import static android.os.SystemClock.sleep;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SocketCluster sc;
     private static String TAG = "SCDemo";
@@ -46,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private StaggeredGridLayoutManager gridLayoutManager;
     private double lat=0;
     private double lon=0;
-
+    static Button notifCount;
+    static int mNotifCount = 0;
 
 
 
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         gridLayoutManager = new StaggeredGridLayoutManager(2,1);
         recyclerView.setLayoutManager(gridLayoutManager);
-        this.dishAdapter = new DishStaggeredAdapter(this, ResourceManager.getInstance().getDishList());
+        this.dishAdapter = new DishStaggeredAdapter(this, ResourceManager.getInstance().getDishList(), this);
         recyclerView.setAdapter(dishAdapter);
     }
 
@@ -122,7 +126,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.badge);
+        MenuItemCompat.setActionView(item, R.layout.feed_update_count);
+        View view = MenuItemCompat.getActionView(item);
+        notifCount = (Button)view.findViewById(R.id.notif_count);
+        notifCount.setText(String.valueOf(mNotifCount));
         return true;
+    }
+    private void setNotifCount(int count){
+        mNotifCount = count;
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -148,5 +162,15 @@ public class MainActivity extends AppCompatActivity {
         //sc.disconnect();
         //TODO: add scf disconnect stuff
         super.onStop();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(DishViewHolder.isSelected(v)){
+            mNotifCount++;
+        }else{
+            mNotifCount--;
+        }
+        invalidateOptionsMenu();
     }
 }

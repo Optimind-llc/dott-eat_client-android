@@ -19,18 +19,19 @@ import java.util.List;
  * Created by hugh on 2016-08-26.
  */
 
-public class DishStaggeredAdapter  extends RecyclerView.Adapter<DishViewHolder> implements View.OnClickListener {
+public class DishStaggeredAdapter  extends RecyclerView.Adapter<DishViewHolder> {
 
     private List<Dish> itemList;
     private Context context;
     View layoutView;
     Drawable fallback;
+    View.OnClickListener listener;
 
 
-    public DishStaggeredAdapter(Context context, List<Dish> itemList) {
+    public DishStaggeredAdapter(Context context, List<Dish> itemList, View.OnClickListener listener) {
         this.itemList = itemList;
         this.context = context;
-
+        this.listener = listener;
         fallback=  ContextCompat.getDrawable(context, R.drawable.powered_by_google_dark);
     }
 
@@ -38,8 +39,7 @@ public class DishStaggeredAdapter  extends RecyclerView.Adapter<DishViewHolder> 
     public DishViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_list, null);
-        DishViewHolder rcv = new DishViewHolder(layoutView);
-        rcv.setListener(this);
+        DishViewHolder rcv = new DishViewHolder(layoutView, listener);
         return rcv;
     }
 
@@ -67,9 +67,5 @@ public class DishStaggeredAdapter  extends RecyclerView.Adapter<DishViewHolder> 
 
     }
 
-    @Override
-    public void onClick(View v) {
 
-
-    }
 }
