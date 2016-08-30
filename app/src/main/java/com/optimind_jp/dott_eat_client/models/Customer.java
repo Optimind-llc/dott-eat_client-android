@@ -79,6 +79,10 @@ public class Customer implements Serializable {
         this.status = status;
         return;
     }
+    public void setWebPayToken(String token) {
+        this.webPayToken = token;
+        return;
+    }
     public void setTelephone( String telephone ){
         this.telephone = telephone;
         return;

@@ -35,6 +35,12 @@
     <string name="prompt_nick_name">ニックネーム</string>
     <string name="prompt_password">パスワード</string>
     <string name="prompt_telephone">携帯番号</string>
+    <string name="prompt_credit_number" translatable="false">クレジットカードナンバー</string>
+    <string name="prompt_expiry_month" translatable="false">有効期限(月)</string>
+    <string name="prompt_expiry_year" translatable="false">有効期限(年)</string>
+    <string name="prompt_cvc" translatable="false">CVC番号(3桁)</string>
+    <string name="prompt_credit_name" translatable="false">カード名義</string>
+
     <string name="action_log_in">Log in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -42,6 +48,8 @@
     <string name="error_invalid_telephone">This telephone number is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_invalid">Invalid, please confirm again!</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

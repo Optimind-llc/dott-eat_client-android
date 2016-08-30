@@ -22,13 +22,11 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -38,6 +36,12 @@ import com.optimind_jp.dott_eat_client.models.CustomerStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.webpay.android.token.WebPay;
+import jp.webpay.android.token.WebPayListener;
+import jp.webpay.android.token.model.RawCard;
+import jp.webpay.android.token.model.Token;
+import jp.webpay.android.token.ui.WebPayTokenCompleteListener;
 
 
 /**
@@ -56,6 +60,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
      * Keep track of the sign up task to ensure we can cancel it if requested.
      */
     private UserSignUpTask mAuthTask = null;
+    private boolean mIsCardConfirming;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -64,6 +69,11 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private EditText mFamilyNameView;
     private EditText mGivenNameView;
     private EditText mPasswordView;
+    private EditText mCardNumberView;
+    private EditText mCardMonthView;
+    private EditText mCardYearView;
+    private EditText mCardCvcView;
+    private EditText mCardNameView;
     private ImageView mPhotoView;
     private View mProgressView;
     private View mSignUpFormView;
@@ -76,6 +86,8 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        mIsCardConfirming = false;
+
         ResourceManager resMan = ResourceManager.getInstance();
         mAuth = resMan.getAuth();
         // Set up the sign up form.
@@ -86,6 +98,13 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         mNickNameView = (EditText) findViewById(R.id.nick_name);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPhotoView = (ImageView) findViewById(R.id.photo) ;
+
+        mCardNumberView = (EditText) findViewById(R.id.card_number_field);
+        mCardYearView = (EditText) findViewById(R.id.card_expiry_year);
+        mCardMonthView = (EditText) findViewById(R.id.card_expiry_month);
+        mCardCvcView = (EditText) findViewById(R.id.card_cvc_field);
+        mCardNameView = (EditText) findViewById(R.id.card_name_field);
+
         populateAutoComplete();
         if(mAuth != null) {
             loadGoogleAccountData();
@@ -99,22 +118,23 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             mPasswordView.setVisibility(View.GONE);
         }
 
+        /*
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.sign_up || id == EditorInfo.IME_NULL) {
-                    attemptSignUp();
+                    attemptSignUpStepOne();
                     return true;
                 }
                 return false;
             }
         });
-
+        */
         Button mEmailSignInButton = (Button) findViewById(R.id.sign_up_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptSignUp();
+                attemptSignUpStepOne();
             }
         });
 
@@ -149,14 +169,122 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         getLoaderManager().initLoader(0, null, this);
     }
 
-
     /**
      * Attempts to sign in or register the account specified by the sign up form.
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual sign up attempt is made.
      */
-    private void attemptSignUp() {
-        if (mAuthTask != null) {
+    private void attemptSignUpStepOne() {
+        if (mAuthTask != null && !mIsCardConfirming) {
+            return;
+        }
+
+        // Reset errors.
+        mCardNumberView.setError(null);
+        mCardMonthView.setError(null);
+        mCardYearView.setError(null);
+        mCardCvcView.setError(null);
+        mCardNameView.setError(null);
+
+        // Store values at the time of the sign up attempt.
+        String cardNumber = mCardNumberView.getText().toString();
+        String cardMonth = mCardMonthView.getText().toString();
+        String cardYear = mCardYearView.getText().toString();
+        String cardCvc = mCardCvcView.getText().toString();
+        String cardName = mCardNameView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check
+        if (TextUtils.isEmpty(cardNumber)) {
+            mCardNumberView.setError(getString(R.string.error_field_required));
+            focusView = mCardNumberView;
+            cancel = true;
+        } else if (!isCardNumValid(cardNumber)) {
+            mCardNumberView.setError(getString(R.string.error_invalid));
+            focusView = mCardNumberView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(cardMonth)) {
+            mCardMonthView.setError(getString(R.string.error_field_required));
+            focusView = mCardMonthView;
+            cancel = true;
+        } else if (cardMonth.length() != 2) {
+            mCardMonthView.setError(getString(R.string.error_invalid));
+            focusView = mCardMonthView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(cardYear)) {
+            mCardYearView.setError(getString(R.string.error_field_required));
+            focusView = mCardYearView;
+            cancel = true;
+        } else if (cardYear.length() != 4) {
+            mCardYearView.setError(getString(R.string.error_invalid));
+            focusView = mCardYearView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(cardCvc)) {
+            mCardCvcView.setError(getString(R.string.error_field_required));
+            focusView = mCardCvcView;
+            cancel = true;
+        } else if (cardCvc.length() < 3) {
+            mCardCvcView.setError(getString(R.string.error_invalid));
+            focusView = mCardCvcView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(cardName)) {
+            mCardNameView.setError(getString(R.string.error_field_required));
+            focusView = mCardNameView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt sign up and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user sign up attempt.
+            final RawCard rawCard = new RawCard()
+                    .number(cardNumber)
+                    .expMonth(Integer.valueOf(cardMonth))
+                    .expYear(Integer.valueOf(cardYear))
+                    .cvc(cardCvc)
+                    .name(cardName);
+
+            showProgress(true);
+            new WebPay(getString(R.string.web_pay_key)).createToken(rawCard, new WebPayListener<Token>() {
+                @Override
+                public void onCreate(Token token) {
+                    mIsCardConfirming = false;
+                    // called when Token created
+                    showProgress(false);
+                    mAuth.setWebPayToken(token.toString());
+                    attemptSignUpStepTwo();
+                }
+
+                @Override
+                public void onException(Throwable cause) {
+                    mIsCardConfirming = false;
+                    // called when error raised
+                    showProgress(false);
+                    mCardNumberView.setError(cause.getMessage());
+                }
+            });
+        }
+    }
+    /**
+     * Attempts to sign in or register the account specified by the sign up form.
+     * If there are form errors (invalid email, missing fields, etc.), the
+     * errors are presented and no actual sign up attempt is made.
+     */
+    private void attemptSignUpStepTwo() {
+        if (mAuthTask != null && !mIsCardConfirming) {
             return;
         }
 
@@ -235,6 +363,11 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private boolean isTelephoneValid(String telephone) {
         //TODO: Replace this with your own logic
         return telephone.length() == 11;
+    }
+
+    private boolean isCardNumValid(String card) {
+        //TODO: Replace this with your own logic
+        return card.length() > 15;
     }
     /**
      * Shows the progress UI and hides the sign up form.
